@@ -1,0 +1,203 @@
+<%--
+    Document   : hood
+    Created on : Nov 27, 2014, 10:21:04 PM
+    Author     : sumitha
+--%>
+
+<%@page import="java.sql.*;"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+         <link rel="stylesheet" type="text/css" href="login.css">
+    	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,800,700,400italic|PT+Serif:400,400italic"/>
+
+        <title>hood </title>
+        <style type="text/css">
+            #fullname {
+               color: #f95252;
+               float: right;
+               margin-right: 185px;
+               font-family: sans-serif;
+               font-size: 25px;
+               font-weight: bolder;
+}
+#det2 {
+    color: black;
+    font-family: sans-serif;
+    font-size: 16px;
+    float: right;
+    margin-top: -165px;
+    margin-right: 95px;
+}
+#head {
+    width: 500px;
+    padding: 20px 20px;
+    border-style: dotted;
+    border-color: purple;
+    background-color: thistle;
+}
+.addbutton {
+ border-top: 1px solid #03070a;
+   background: #050505;
+   background: -webkit-gradient(linear, left top, left bottom, from(#030303), to(#050505));
+   background: -webkit-linear-gradient(top, #030303, #050505);
+   background: -moz-linear-gradient(top, #030303, #050505);
+   background: -ms-linear-gradient(top, #030303, #050505);
+   background: -o-linear-gradient(top, #030303, #050505);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #f7f7f7;
+   font-size: 14px;
+   font-family: Georgia, Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   width: 50px;
+   height: 10px;
+   }
+.addbutton:hover {
+   border-top-color: #502859;
+   background: #502859;
+   color: #ccc;
+   }
+.addbutton:active {
+   border-top-color: #441b5c;
+   background: #441b5c;
+   }
+
+        </style>
+    </head>
+    <body>
+        <img src="images/logo.PNG" width="210" height="100"><br>
+          <%
+       HttpSession ses=request.getSession();
+       String email=(String) ses.getAttribute("emailid");
+       %>
+       <div class="login-area">
+           <%
+       if(email==null){
+           %>
+           <script type="text/javascript">
+               alert("Please login to continue");
+               window.location="index.jsp";
+           </script>
+           <%
+           }
+       else {
+           out.println("<a class=login-link href=myhood.jsp>"+email+"</a> | ");
+           %>
+           <a class="login-link" href="index.jsp">Logout</a></div>
+                   <%
+           }
+        int uid=Integer.parseInt(request.getParameter("uid"));
+        out.println("uid"+uid);
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3308/tangledb","root","admin");
+        Statement st=con.createStatement();
+        String query="select * from user where emailid="+email;
+        PreparedStatement pst=con.prepareStatement("select userid,emailid from user where emailid='"+email+"'");
+        ResultSet res=pst.executeQuery();
+        res.first();
+        String loggeduid=res.getString("userid");
+         out.println("loggduid"+loggeduid);
+        PreparedStatement friend=con.prepareStatement("select userid,fid from relation where userid="+loggeduid+" and fid="+uid);
+        ResultSet frnd=friend.executeQuery();
+
+        PreparedStatement pst2=con.prepareStatement("select * from user where userid="+uid);
+        ResultSet res2=pst2.executeQuery();
+        res2.first();
+        String dp=res2.getString("dp");
+        String fname=res2.getString("fname");
+        String lname=res2.getString("lname");
+        String gender=res2.getString("gender");
+        int age=Integer.parseInt(res2.getString("age"));
+        String dob=res2.getString("dob");
+        %>
+        <section id="container">
+			<header>
+            	<!-- Logo -->
+            	<div id="logo">
+                	<h2><%out.println(fname+" "+lname);%></h2>
+                    <h4>GRAPHIC & WEB DESIGNER</h4>
+                </div>
+                <!-- /Logo -->
+                </header>
+            <!-- /Header -->
+
+            <!-- Content -->
+            <section id="content" >
+
+                <!-- Profile -->
+                <div id="profile">
+                 	<!-- About section -->
+                	<div class="about">
+                    	<div class="photo-inner">
+                            <ul>
+                                <li><img src=<%=dp%> height="186" width="153" /></li>
+                           </ul>
+                        </div>
+                        <h1><%out.println(fname+" "+lname);%></h1>
+                        <h3><%out.println(gender+", "+age+"yrs");%></h3>
+
+                       <%
+                       if(frnd.first()) {
+                           %>
+                           <label>You are already friends</label>
+                           <%
+                           }
+                        else
+                            {
+                       %>
+                       <div class="addbutton" ><form id="frendform" method="post" action="f_req.jsp"><input type="hidden" name="luid" value="<%=loggeduid%>"><input type="hidden" name="fuid" value="<%=uid%>"><input type="submit" name="addbutton" value="Add Friend+" onclick="alert('Friend request sent!')"></form></div>
+                        <% }%>
+                         <!-- /About section -->
+
+                    <!-- Personal info section -->
+                	<ul class="personal-info">
+		       <li><label>Name</label><span><%out.println(fname+" "+lname);%></span></li>
+                        <li><label>Birthday</label><span><%out.println(dob);%></span></li>
+                        <li><label>Address</label><span>Melbourne Victoria 3000 Australia</span></li>
+                        <li><label>Email</label><span class="word-wrap">Anderson.smith@gmail.com</span></li>
+                        <li><label>Phone</label><span>+123 456 789 111</span></li>
+                    </ul>
+                    <!-- /Personal info section -->
+                </div>
+                <!-- /Profile -->
+
+                <!-- Menu -->
+                <div class="menu">
+                	<ul class="tabs">
+                        <li class="tmenu"><a href="#profile" class="tab-profile"><i>&#x43;</i>Profile</a></li>
+                        <li class="tmenu"><a href="#resume"><i>&#x3a;</i>Resume</a></li>
+                        <li class="tmenu"><a href="#portfolio"><i>&#x38;</i>Portfolio</a></li>
+                        <li class="tmenu"><a href="#contact"><i>&#x21;</i>Contact</a></li>
+                    </ul>
+                    <a class="prev" id="menu-prev" href="#">&#xe073;</a>
+                    <a class="next" id="menu-next" href="#">&#xe076;</a>
+
+                </div>
+<%
+while(request.getParameter("freq")!=null) {
+        if(request.getParameter("freq").equals("requestsent")) {
+             %>
+             f_req();
+          <%
+                 }
+        }
+        
+        %>
+    </body>
+</html>

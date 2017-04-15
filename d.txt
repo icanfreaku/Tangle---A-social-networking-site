@@ -1,0 +1,3 @@
+Executed SQL Statement : select count(*) from `messages` where `fromid`='11' and `toid`='12' and `msg`='fdf' and `time`='4.20' 
+Error Number : 1054 
+Error Message: Unknown column 'time' in 'where clause' 

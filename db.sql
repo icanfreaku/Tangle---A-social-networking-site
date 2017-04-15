@@ -1,0 +1,1 @@
+DELETE FROM frequest WHERE userid=10 AND fid=12;
