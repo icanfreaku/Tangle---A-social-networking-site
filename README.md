@@ -3,16 +3,16 @@ The main objective of this project is to develop a social networking webApp whic
 ####
 
 ### Hardware Specification
-• Operating System: Windows 7, Windows 8 64-bit.
-• Browser: Google Chrome, Mozilla Firefox, Safari, Internet Explorer version 10 or
+- Operating System: Windows 7, Windows 8 64-bit.
+- Browser: Google Chrome, Mozilla Firefox, Safari, Internet Explorer version 10 or
 above.
-• Processor: AMD A10-4600M APU with Radeon (tm) HD Graphics.
-• Hard Disk: 1Terabytes.
-• RAM: 4 Gigabytes.
+- Processor: AMD A10-4600M APU with Radeon (tm) HD Graphics.
+- Hard Disk: 1Terabytes.
+- RAM: 4 Gigabytes.
 
 ### Hardware Specification
-• Front end: Java Server Pages(JSP), HTML,CSS, JavaScript.
-• Design tools: JQuery, Lightbox min 1.11(JS library), Adobe Photoshop
-• Back end: Servlet.
-• Database: MySql.
-• Tools used: Net beans 6.9, SqlYog Community (database client) and notepad++.
+- Front end: Java Server Pages(JSP), HTML,CSS, JavaScript.
+- Design tools: JQuery, Lightbox min 1.11(JS library), Adobe Photoshop
+- Back end: Servlet.
+- Database: MySql.
+- Tools used: Net beans 6.9, SqlYog Community (database client) and notepad++.
