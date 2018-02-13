@@ -1,5 +1,5 @@
-## Tangle - A Social netwokring site
-#### Author : Sumitha Dhanasekaran
+## Tangle - A Social networking site
+#### Author : Sumita Dhanasekaran
 
 The main objective of this project is to develop a social networking webApp which serves as communication link between users from different physical locations. It would allow its users to have a personalized profile for each of them. Visit the profile or hood of other users, message them and share photos and post notes for them to see. It uses html, CSS to design the frontend along with JSP & Servlet. The application uses MySql database for data storage.
 ####
@@ -12,7 +12,7 @@ above.
 - Hard Disk: 1Terabytes.
 - RAM: 4 Gigabytes.
 
-### Hardware Specification
+### Software Specification
 - Front end: Java Server Pages(JSP), HTML,CSS, JavaScript.
 - Design tools: JQuery, Lightbox min 1.11(JS library), Adobe Photoshop
 - Back end: Servlet.
