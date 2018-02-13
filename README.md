@@ -12,7 +12,7 @@ above.
 - Hard Disk: 1Terabytes.
 - RAM: 4 Gigabytes.
 
-### Hardware Specification
+### Software Specification
 - Front end: Java Server Pages(JSP), HTML,CSS, JavaScript.
 - Design tools: JQuery, Lightbox min 1.11(JS library), Adobe Photoshop
 - Back end: Servlet.
